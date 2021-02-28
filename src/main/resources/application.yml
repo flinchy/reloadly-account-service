@@ -47,6 +47,9 @@ app:
     validateUrl: http://auth-service/oauth/check_token?token=
     basicAuth: Basic dGVzdDp0ZW1w
 
+
+account-server-health: https://reloadly-account-service.herokuapp.com/actuator/health
+
 ---
 spring:
   datasource:

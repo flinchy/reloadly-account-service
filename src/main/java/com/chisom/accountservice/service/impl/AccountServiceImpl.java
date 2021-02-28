@@ -13,10 +13,13 @@ import com.chisom.accountservice.utils.ConfigUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
@@ -26,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 import static com.chisom.accountservice.constants.AccountServiceConstants.*;
 import static com.chisom.accountservice.utils.AccountServiceUtils.generateAccountNumber;
@@ -41,15 +45,19 @@ public class AccountServiceImpl implements AccountService {
     private final SavingsAccountRepository savingsAccountRepository;
     private final RestTemplate restTemplate;
     private final ConfigUtils configUtils;
+    private final String accountServiceUrl;
 
     @Autowired
     public AccountServiceImpl(
             SavingsAccountRepository savingsAccountRepository,
             RestTemplate restTemplate,
-            ConfigUtils configUtils) {
+            ConfigUtils configUtils,
+            @Value("${account-server-health}") String accountServiceUrl
+    ) {
         this.savingsAccountRepository = savingsAccountRepository;
         this.restTemplate = restTemplate;
         this.configUtils = configUtils;
+        this.accountServiceUrl = accountServiceUrl;
     }
 
     /**
@@ -390,4 +398,17 @@ public class AccountServiceImpl implements AccountService {
         return headers;
     }
 
+    /**
+     * ping url every 5min to keep alive
+     */
+    @Async
+    @Scheduled(fixedRate = 300000)
+    public void health() {
+        try {
+            CompletableFuture.runAsync(() ->
+                    restTemplate.getForObject(accountServiceUrl, Object.class));
+        } catch (Exception e) {
+            log.error("caught an exception :::", e);
+        }
+    }
 }
