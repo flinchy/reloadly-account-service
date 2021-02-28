@@ -10,6 +10,7 @@ import com.chisom.accountservice.dto.response.UpdateAccountResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author Chisom.Iwowo
@@ -22,7 +23,7 @@ public interface AccountService {
      * @param accountRegistrationRequest account registration request
      * @return Object
      */
-    AccountRegisterResponse registerNewAccount(
+    CompletableFuture<AccountRegisterResponse> registerNewAccount(
             AccountRegistrationRequest accountRegistrationRequest);
 
     /**

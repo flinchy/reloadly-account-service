@@ -36,7 +36,7 @@ public class AccountControllerFacade implements AccountController {
             @Valid AccountRegistrationRequest accountRegistrationRequest
     ) {
 
-        return CompletableFuture.supplyAsync(() -> accountService.registerNewAccount(accountRegistrationRequest)).thenApply(x -> x);
+        return accountService.registerNewAccount(accountRegistrationRequest);
     }
 
     /**

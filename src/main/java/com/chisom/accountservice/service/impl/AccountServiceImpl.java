@@ -96,7 +96,7 @@ public class AccountServiceImpl implements AccountService {
      * @return Object
      */
     @Override
-    public AccountRegisterResponse registerNewAccount(
+    public CompletableFuture<AccountRegisterResponse> registerNewAccount(
             AccountRegistrationRequest accountRegistrationRequest
     ) {
         try {
@@ -108,7 +108,7 @@ public class AccountServiceImpl implements AccountService {
                     .postForEntity(configUtils.getRegistrationUrl(), entity,
                             AccountRegisterResponse.class).getBody();
             //create a savings account for the user.
-            return createSavingsAccount(apiResponse);
+            return CompletableFuture.completedFuture(createSavingsAccount(apiResponse));
 
         } catch (Exception exception) {
             throw new CustomException(exception.getMessage(),
