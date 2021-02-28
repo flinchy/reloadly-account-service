@@ -18,6 +18,7 @@ import java.util.concurrent.CompletableFuture;
 /**
  * @author Chisom.Iwowo
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/account")
 public interface AccountController {
