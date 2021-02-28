@@ -42,14 +42,14 @@ app:
   auth-service:
     registrationUrl: https://reloadly-auth-server.herokuapp.com/oauth/users
     accountUpdateUrl: http://auth-service/oauth/update-user/
-    notificationUrl: https://notification-service/notification/email
+    notificationUrl: https://reloadly-notification-service.herokuapp.com/notification/email
     transactionUrl: https://transaction-service/transaction
     loginUrl: http://auth-service/oauth/token
     validateUrl: http://auth-service/oauth/check_token?token=
     basicAuth: Basic dGVzdDp0ZW1w
 
 
-account-server-health: https://reloadly-account-service.herokuapp.com/
+account-server-health: https://reloadly-account-service.herokuapp.com/actuator/health
 
 ---
 spring:
