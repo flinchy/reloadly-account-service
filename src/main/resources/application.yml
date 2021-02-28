@@ -48,7 +48,7 @@ app:
     basicAuth: Basic dGVzdDp0ZW1w
 
 
-account-server-health: https://reloadly-account-service.herokuapp.com/actuator/health
+account-server-health: https://reloadly-account-service.herokuapp.com/
 
 ---
 spring:
