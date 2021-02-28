@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author Chisom.Iwowo
@@ -29,7 +30,7 @@ public interface AccountController {
      */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    AccountRegisterResponse register(
+    CompletableFuture<AccountRegisterResponse> register(
             @Valid @RequestBody final AccountRegistrationRequest accountRegistrationRequest);
 
     /**

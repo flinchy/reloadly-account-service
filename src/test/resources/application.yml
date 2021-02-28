@@ -8,3 +8,5 @@ spring:
       ddl-auto: update
   profiles:
     active: test
+
+account-server-health: https://test.com

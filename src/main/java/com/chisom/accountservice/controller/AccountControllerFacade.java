@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author Chisom.Iwowo
@@ -31,11 +32,11 @@ public class AccountControllerFacade implements AccountController {
      * @return LoginResponse
      */
     @Override
-    public AccountRegisterResponse register(
+    public CompletableFuture<AccountRegisterResponse> register(
             @Valid AccountRegistrationRequest accountRegistrationRequest
     ) {
 
-        return accountService.registerNewAccount(accountRegistrationRequest);
+        return CompletableFuture.supplyAsync(() -> accountService.registerNewAccount(accountRegistrationRequest)).thenApply(x -> x);
     }
 
     /**
