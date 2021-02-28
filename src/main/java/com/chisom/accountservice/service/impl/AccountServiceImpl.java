@@ -107,6 +107,7 @@ public class AccountServiceImpl implements AccountService {
             AccountRegisterResponse apiResponse = restTemplate
                     .postForEntity(configUtils.getRegistrationUrl(), entity,
                             AccountRegisterResponse.class).getBody();
+            log.info("response from auth server ::: {}", apiResponse);
             //create a savings account for the user.
             return CompletableFuture.completedFuture(createSavingsAccount(apiResponse));
 
@@ -119,6 +120,8 @@ public class AccountServiceImpl implements AccountService {
     private AccountRegisterResponse createSavingsAccount(
             AccountRegisterResponse apiResponse
     ) {
+        log.info("create savings account with data ::: {}", apiResponse);
+
         if (apiResponse != null) {
             if (apiResponse.isStatus()) {
                 //save savings account
@@ -402,7 +405,7 @@ public class AccountServiceImpl implements AccountService {
      * ping url to keep alive
      */
     @Async
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 60000)
     public void ping() {
         try {
             CompletableFuture.runAsync(() ->

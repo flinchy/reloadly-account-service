@@ -14,4 +14,5 @@ public class AccountRegistrationPayload {
     private Long userId;
     private String username;
     private String fullName;
+
 }
