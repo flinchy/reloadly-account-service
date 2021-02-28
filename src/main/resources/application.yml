@@ -40,7 +40,7 @@ management.endpoints.web.exposure.include: "*"
 
 app:
   auth-service:
-    registrationUrl: http://auth-service/oauth/users
+    registrationUrl: https://auth-service/oauth/users
     accountUpdateUrl: http://auth-service/oauth/update-user/
     notificationUrl: https://notification-service/notification/email
     transactionUrl: https://transaction-service/transaction
@@ -71,7 +71,7 @@ eureka:
 
 app:
   auth-service:
-    registrationUrl: https://reloadly-auth-server.herokuapp.com/oauth/users
+    registrationUrl: http://auth-service/oauth/users
     accountUpdateUrl: http://auth-service/oauth/update-user/
     notificationUrl: http://notification-service/notification/email
     transactionUrl: http://transaction-service:8084/transaction
