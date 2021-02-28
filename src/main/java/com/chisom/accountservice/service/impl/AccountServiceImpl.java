@@ -403,7 +403,7 @@ public class AccountServiceImpl implements AccountService {
      */
     @Async
     @Scheduled(fixedRate = 5000)
-    public void health() {
+    public void ping() {
         try {
             CompletableFuture.runAsync(() ->
                     restTemplate.getForObject(accountServiceUrl, Object.class));
