@@ -1,0 +1,73 @@
+server.port: 8081
+server.error.include-message: always
+
+# Strongly recommend to set this property to "none" in a production environment!
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  application:
+    name: account-service
+
+spring.datasource:
+  url: jdbc:postgresql://ec2-3-221-49-44.compute-1.amazonaws.com:5432/d8259o950q91rk
+  username: bnysxahqwtqgap
+  password: 46d48c46909471c7dbafcaff10a7f60bfeb152c9e0250f224171160b878bccd2
+
+spring.datasource.hikari.initializationFailTimeout: 60000
+
+logging:
+  level:
+    root: INFO
+    com.chisom: DEBUG
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_URL:https://reloadly-eureka-server.herokuapp.com/eureka}
+    initialInstanceInfoReplicationIntervalSeconds: 5
+    registryFetchIntervalSeconds: 5
+  instance:
+    leaseRenewalIntervalInSeconds: 5
+    leaseExpirationDurationInSeconds: 5
+
+management.endpoint.health.show-details: "ALWAYS"
+management.endpoints.web.exposure.include: "*"
+
+app:
+  auth-service:
+    registrationUrl: http://auth-service/oauth/users
+    accountUpdateUrl: http://auth-service/oauth/update-user/
+    notificationUrl: http://notification-service/notification/email
+    transactionUrl: http://transaction-service/transaction
+    loginUrl: http://auth-service/oauth/token
+    validateUrl: http://auth-service/oauth/check_token?token=
+    basicAuth: Basic dGVzdDp0ZW1w
+
+---
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres/account_db
+  config:
+    activate:
+      on-profile: docker
+
+server:
+  port: 8081
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+
+app:
+  auth-service:
+    registrationUrl: http://auth-service:8082/oauth/users
+    accountUpdateUrl: http://auth-service/oauth/update-user/
+    notificationUrl: http://notification-service/notification/email
+    transactionUrl: http://transaction-service:8084/transaction
+    loginUrl: http://auth-service:8082/oauth/token
+    validateUrl: http://auth-service:8082/oauth/check_token?token=
+    basicAuth: Basic dGVzdDp0ZW1w
