@@ -402,7 +402,7 @@ public class AccountServiceImpl implements AccountService {
      * ping url every 5min to keep alive
      */
     @Async
-    @Scheduled(fixedRate = 300000)
+    @Scheduled(fixedRate = 5000)
     public void health() {
         try {
             CompletableFuture.runAsync(() ->
