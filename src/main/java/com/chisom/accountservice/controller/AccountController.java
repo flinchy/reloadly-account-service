@@ -7,8 +7,6 @@ import com.chisom.accountservice.dto.response.AccountRegisterResponse;
 import com.chisom.accountservice.dto.response.LoginResponse;
 import com.chisom.accountservice.dto.response.TransactionResponse;
 import com.chisom.accountservice.dto.response.UpdateAccountResponse;
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
