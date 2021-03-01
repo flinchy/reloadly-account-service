@@ -24,11 +24,15 @@ import java.util.stream.Collectors;
 @Component
 public class JwtAuthProvider extends AbstractUserDetailsAuthenticationProvider {
 
-    @Autowired
-    private ConfigUtils configUtils;
+    private final ConfigUtils configUtils;
+    private final RestTemplate restTemplate;
 
     @Autowired
-    private RestTemplate restTemplate;
+    public JwtAuthProvider(ConfigUtils configUtils, RestTemplate restTemplate
+    ) {
+        this.configUtils = configUtils;
+        this.restTemplate = restTemplate;
+    }
 
     @Override
     protected void additionalAuthenticationChecks(
@@ -75,7 +79,7 @@ public class JwtAuthProvider extends AbstractUserDetailsAuthenticationProvider {
     ) {
         //add basic auth so that the authorization server will recognize this client app (Transaction service)
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-        headers.add(HttpHeaders.AUTHORIZATION,  configUtils.getBasicAuth());
+        headers.add(HttpHeaders.AUTHORIZATION, configUtils.getBasicAuth());
 
         HttpEntity<UsernamePasswordAuthenticationTokenImpl> entity = new HttpEntity<>(headers);
         return restTemplate.postForEntity(
