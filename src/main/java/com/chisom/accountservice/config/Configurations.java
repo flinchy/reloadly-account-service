@@ -7,7 +7,6 @@ import org.springframework.web.client.RestTemplate;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.spi.service.contexts.SecurityContext;
-import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -71,6 +70,6 @@ public class Configurations {
                 = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
-        return Arrays.asList(new SecurityReference("JWT", authorizationScopes));
+        return Collections.singletonList(new SecurityReference("JWT", authorizationScopes));
     }
 }
