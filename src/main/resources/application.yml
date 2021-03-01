@@ -59,7 +59,7 @@ api:
     ### Using swagger and Token
     To use the secured endpoints with swagger, first obtain a token from the Login Endpoint,
     then click the Authorize button and add token.
-    e.g Bearer <Token>
+    e.g Bearer 'token-value'
   register:
     description: register for a savings account.
 
