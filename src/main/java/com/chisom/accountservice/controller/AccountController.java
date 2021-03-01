@@ -7,6 +7,7 @@ import com.chisom.accountservice.dto.response.AccountRegisterResponse;
 import com.chisom.accountservice.dto.response.LoginResponse;
 import com.chisom.accountservice.dto.response.TransactionResponse;
 import com.chisom.accountservice.dto.response.UpdateAccountResponse;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -30,6 +31,8 @@ public interface AccountController {
      * @param accountRegistrationRequest registration request
      * @return AccountRegisterResponse
      */
+    @ApiOperation(
+            value = "${api.register.description}")
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     CompletableFuture<AccountRegisterResponse> register(
@@ -41,6 +44,9 @@ public interface AccountController {
      * @param loginRequest login request
      * @return LoginResponse
      */
+    @ApiOperation(
+            value = "${api.login.description}",
+            notes = "${api.login.notes}")
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     LoginResponse login(@Valid @RequestBody LoginRequest loginRequest);
@@ -52,6 +58,9 @@ public interface AccountController {
      * @param principal logged in user
      * @return String
      */
+    @ApiOperation(
+            value = "${api.deposit.description}",
+            notes = "${api.deposit.notes}")
     @PostMapping("/deposit")
     @ResponseStatus(HttpStatus.OK)
     TransactionResponse deposit(
@@ -65,6 +74,9 @@ public interface AccountController {
      * @param principal logged in user
      * @return String
      */
+    @ApiOperation(
+            value = "${api.withdraw.description}",
+            notes = "${api.withdraw.notes}")
     @PostMapping("withdraw")
     @ResponseStatus(HttpStatus.OK)
     TransactionResponse withdraw(
@@ -77,6 +89,9 @@ public interface AccountController {
      * @param updateAccountRequest update request
      * @return Object
      */
+    @ApiOperation(
+            value = "${api.update-account.description}",
+            notes = "${api.update-account.notes}")
     @PostMapping("update")
     @ResponseStatus(HttpStatus.CREATED)
     UpdateAccountResponse updateSavingsAccount(

@@ -50,6 +50,40 @@ app:
 
 account-server-health: https://reloadly-account-service.herokuapp.com/actuator/health
 
+api:
+  description: |
+    ### Rest Endpoint for Account Microservice.
+    After a successful Registration, obtain a token from the
+    Login Endpoint, add this token to the header of every request to enable you access to the secured endpoints.
+
+    ### Using swagger and Token
+    To use the secured endpoints with swagger, first obtain a token from the Login Endpoint,
+    then click the Authorize button and add token.
+    e.g Bearer <Token>
+  register:
+    description: register for a savings account.
+
+  login:
+    description: login to your account
+    notes: |
+      secure the access token obtained from this endpoint, token will be required to
+      access secured resource.
+
+  deposit:
+    description: deposit to your account.
+    notes: |
+      Token is required, attach token to the header of your request to enable you access to this resource
+
+  withdraw:
+    description: make a withdrawal from your savings account
+    notes: |
+      Token is required, attach token to the header of your request to enable you access to this resource
+
+  update-account:
+    description: update your account details.
+    notes: |
+      Token is required, attach token to the header of your request to enable you access to this resource
+
 ---
 spring:
   datasource:

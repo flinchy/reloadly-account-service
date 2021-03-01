@@ -1,5 +1,6 @@
 package com.chisom.accountservice.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -24,6 +25,9 @@ public class Configurations {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
 
+    @Value("${api.description}")
+    private String description;
+
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
@@ -31,7 +35,7 @@ public class Configurations {
 
     private ApiInfo apiInfo() {
         return new ApiInfo("REST API - Account Service",
-                "Rest Endpoint for Account Microservice.",
+                description,
                 "1.0",
                 "Terms of service",
                 new Contact("Chisom Iwowo", "https://www.linkedin.com/in/iwowo-chisom/", "iwowochisom@gmail.com"),
