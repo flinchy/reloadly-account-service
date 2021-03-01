@@ -401,17 +401,17 @@ public class AccountServiceImpl implements AccountService {
         return headers;
     }
 
-    /**
-     * ping url to keep alive
-     */
-    @Async
-    @Scheduled(fixedRate = 60000)
-    public void ping() {
-        try {
-            CompletableFuture.runAsync(() ->
-                    restTemplate.getForObject(accountServiceUrl, Object.class));
-        } catch (Exception e) {
-            log.error("caught an exception :::", e);
-        }
-    }
+//    /**
+//     * ping url every 5min to keep alive
+//     */
+//    @Async
+//    @Scheduled(fixedRate = 300000)
+//    public void ping() {
+//        try {
+//            CompletableFuture.runAsync(() ->
+//                    restTemplate.getForObject(accountServiceUrl, Object.class));
+//        } catch (Exception e) {
+//            log.error("caught an exception :::", e);
+//        }
+//    }
 }
