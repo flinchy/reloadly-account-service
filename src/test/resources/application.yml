@@ -10,3 +10,25 @@ spring:
     active: test
 
 account-server-health: https://test.com
+
+api:
+  description:
+
+  register:
+    description:
+
+  login:
+    description:
+    notes:
+
+  deposit:
+    description:
+    notes:
+
+  withdraw:
+    description:
+    notes:
+
+  update-account:
+    description:
+    notes:
