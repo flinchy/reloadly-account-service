@@ -7,6 +7,7 @@ import com.chisom.accountservice.dto.response.AccountRegisterResponse;
 import com.chisom.accountservice.dto.response.LoginResponse;
 import com.chisom.accountservice.dto.response.TransactionResponse;
 import com.chisom.accountservice.dto.response.UpdateAccountResponse;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,7 +55,8 @@ public interface AccountController {
     @PostMapping("/deposit")
     @ResponseStatus(HttpStatus.OK)
     TransactionResponse deposit(
-            @RequestParam final double amount, Principal principal, HttpServletRequest request);
+            @RequestParam final double amount,
+            @ApiParam(hidden = true)  Principal principal, HttpServletRequest request);
 
     /**
      * endpoint to withdraw money.
@@ -66,7 +68,8 @@ public interface AccountController {
     @PostMapping("withdraw")
     @ResponseStatus(HttpStatus.OK)
     TransactionResponse withdraw(
-            @RequestParam final double amount, Principal principal, HttpServletRequest request);
+            @RequestParam final double amount,
+            @ApiParam(hidden = true)  Principal principal, HttpServletRequest request);
 
     /**
      * update account details
@@ -77,6 +80,7 @@ public interface AccountController {
     @PostMapping("update")
     @ResponseStatus(HttpStatus.CREATED)
     UpdateAccountResponse updateSavingsAccount(
-            @Valid @RequestBody final UpdateAccountRequest updateAccountRequest, Principal principal);
+            @Valid @RequestBody final UpdateAccountRequest updateAccountRequest,
+            @ApiParam(hidden = true)  Principal principal);
 }
 
