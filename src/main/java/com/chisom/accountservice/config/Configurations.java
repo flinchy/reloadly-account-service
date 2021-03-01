@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static springfox.documentation.builders.RequestHandlerSelectors.basePackage;
+
 @Configuration
 public class Configurations {
 
@@ -45,7 +47,7 @@ public class Configurations {
                 .securityContexts(Collections.singletonList(securityContext()))
                 .securitySchemes(Collections.singletonList(apiKey()))
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(basePackage("com.chisom.accountservice"))
                 .paths(PathSelectors.any())
                 .build();
     }
